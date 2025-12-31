@@ -10,6 +10,8 @@ import { faAngleLeft, faCircleQuestion } from '@fortawesome/free-solid-svg-icons
 import ErrorModal from '@/components/ErrorModal';
 import HelpModal from '@/components/HelpModal';
 
+export const dynamic = 'force-dynamic';
+
 export default function TripPage() {
   const params = useParams();
   const router = useRouter();

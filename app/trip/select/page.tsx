@@ -7,6 +7,8 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { getTripByCode } from '@/data/trips';
 import ErrorModal from '@/components/ErrorModal';
 
+export const dynamic = 'force-dynamic';
+
 const cardTypes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] as const;
 
 export default function SelectCardPage() {
