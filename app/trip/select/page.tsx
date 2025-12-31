@@ -1,17 +1,15 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { getTripByCode } from '@/data/trips';
 import ErrorModal from '@/components/ErrorModal';
 
-export const dynamic = 'force-dynamic';
-
 const cardTypes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'] as const;
 
-export default function SelectCardPage() {
+function SelectCardContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [name, setName] = useState('');
@@ -115,6 +113,18 @@ export default function SelectCardPage() {
       </div>
     </div>
     </>
+  );
+}
+
+export default function SelectCardPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-lg text-white">読み込み中...</div>
+      </div>
+    }>
+      <SelectCardContent />
+    </Suspense>
   );
 }
 

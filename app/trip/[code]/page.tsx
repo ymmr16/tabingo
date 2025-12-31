@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { getRandomActivities, getTripByCode } from '@/data/trips';
 import { Activity } from '@/types/trip';
 import ActivityBingo from '@/components/ActivityBingo';
@@ -10,9 +10,7 @@ import { faAngleLeft, faCircleQuestion } from '@fortawesome/free-solid-svg-icons
 import ErrorModal from '@/components/ErrorModal';
 import HelpModal from '@/components/HelpModal';
 
-export const dynamic = 'force-dynamic';
-
-export default function TripPage() {
+function TripPageContent() {
   const params = useParams();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -138,6 +136,18 @@ export default function TripPage() {
       </div>
     </div>
     </>
+  );
+}
+
+export default function TripPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-lg text-white">読み込み中...</div>
+      </div>
+    }>
+      <TripPageContent />
+    </Suspense>
   );
 }
 
